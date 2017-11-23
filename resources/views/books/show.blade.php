@@ -1,6 +1,7 @@
 @extends ('admin.layouts.app_admin')
 @section('content')
 <div class="container">
+@if(count($book)>0)
 <div class="row">
     <div class="col-sm-4">
         <img style="width:80%"src="../../../public/storage/cover_images/{{$book->books_image}}">
@@ -9,15 +10,14 @@
         <h2>{{$book->books_name}}<h2>
         <h4>Автор:
             @foreach ($book->authors as $author)
-                @if($loop->first)
-                    {{$author->author_name}} {{$author->author_surname}} {{$author->author_middlename}}
-                @else
-                    , {{$author->author_name}} {{$author->author_surname}} {{$author->author_middlename}}
+                @if($loop->first==FALSE)
+                    , 
                 @endif
+                <a href="{{ url('/admin/authors/'.$author->id) }}">{{$author->author_name}} {{$author->author_surname}} {{$author->author_middlename}}</a>
             @endforeach
         <h4>
         <h4>Год издания: {{$book->books_year}}</h4>
-        <h4>Направление: {{$book->heading->heading_name}}</h4>
+        <h4>Направление: <a href="{{ url('/admin/kategory/'.$book->heading->id) }}">{{$book->heading->heading_name}}</a></h4>
         <h4>Язык: {{$book->language->languages_name}}</h4>
         <h4>Издательство: {{$book->phouse->phouses_name}}</h4>
         <h4>Количество страниц: {{$book->books_pages}}</h4>
@@ -37,5 +37,8 @@
     </form>
     </div>
     </div>
+    @else
+        <h1>not found</h1>   
+    @endif
 </div>
 @endsection

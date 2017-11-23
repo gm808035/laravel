@@ -24,13 +24,14 @@ class BooksController extends Controller
         $books=book::where('books_name','like','%'.$search.'%')
                     ->orwhereHas('authors',function($query) use ($search)
                     {
-                        $query->where('author_name',$search)
-                              ->orwhere('author_surname',$search)
-                              ->orwhere('author_middlename',$search);
+                        $query->where('author_name','like','%'.$search.'%')
+                            ->orwhere('author_surname','like','%'.$search.'%')
+                            ->orwhere('author_middlename','like','%'.$search.'%');
                     })
                     ->get();                 
         $books->load('authors', 'heading','language');
-        return view('books/index')->with('books',$books);
+        $image_source=1;
+        return view('books/index')->with('books',$books)->with('src',$image_source);
     }
 
     /**
@@ -78,12 +79,20 @@ class BooksController extends Controller
         $headings = heading::orderBy('heading_name', 'asc')->get();
         $languages=language::orderBy('languages_name', 'asc')->get();
         $phouses=phouse::orderBy('phouses_name', 'asc')->get();
+        $authors=author::orderBy('author_name', 'asc')->get();
         return view('books/edit')->with('book',$book)
                                 ->with('headings',$headings)
                                 ->with('lang',$languages)
+                                ->with('authors',$authors)
                                 ->with('phouses',$phouses);
     }
-
+    public function edit2($id)
+    {
+        $book=book::find($id);
+        $authors=author::orderBy('author_name', 'asc')->get();
+        return view('books/edit2')->with('book',$book)
+                                ->with('authors',$authors);
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -134,5 +143,26 @@ class BooksController extends Controller
         $book->delete();
         return redirect('admin/');
     }
-    
+    public function kategory($id)
+    {
+        $books=book::whereHas('heading',function($query) use ($id)
+                    {
+                        $query->where('id',$id);
+                    })
+                    ->get();                 
+        $books->load('authors', 'heading','language');
+        $image_source=0;
+        return view('books/index')->with('books',$books)->with('src',$image_source);
+    }
+    public function authors($id)
+    {
+        $books=book::whereHas('authors',function($query) use ($id)
+        {
+            $query->where('id',$id);
+        })
+        ->get();                 
+        $books->load('authors', 'heading','language');
+        $image_source=0;
+        return view('books/index')->with('books',$books)->with('src',$image_source);
+    }
 }

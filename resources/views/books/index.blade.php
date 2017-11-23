@@ -6,21 +6,24 @@
         @foreach ($books as $book)
             <div class="col-sm-6 well">
                 <div class="col-sm-4">
-                <img style="width:100%" src="../storage/cover_images/{{$book->books_image}}">
+                @if($src==1)
+                    <img style="width:100%" src="../storage/cover_images/{{$book->books_image}}">
+                @else
+                <img style="width:100%"src="../../../public/storage/cover_images/{{$book->books_image}}">
+                @endif
                 </div>
                 <div class="col-sm-8">
                 <h4><a href="{{ url('/admin/books/'.$book->id) }}">{{$book->books_name}}</a></h4>
                 <h5>Год издания: {{$book->books_year}}</h5>
                 <h5>Автор: 
                     @foreach ($book->authors as $author)
-                        @if($loop->first)
-                            {{$author->author_name}} {{$author->author_surname}} {{$author->author_middlename}}
-                        @else
-                            , {{$author->author_name}} {{$author->author_surname}} {{$author->author_middlename}}
+                        @if($loop->first==FALSE)
+                            ,
                         @endif
+                        <a href="{{ url('/admin/authors/'.$author->id) }}">{{$author->author_name}} {{$author->author_surname}} {{$author->author_middlename}}</a>
                     @endforeach
                 </h5>
-                <h5>Направление: {{$book->heading->heading_name}}</h5>
+                <h5>Направление: <a href="{{ url('/admin/kategory/'.$book->heading->id) }}">{{$book->heading->heading_name}}</a></h5>
                 <h5>Язык: {{$book->language->languages_name}}</h5>
                 <h5>Издательство: {{$book->phouse->phouses_name}}</h5>
                 <h5>Количество страниц: {{$book->books_pages}}</h5>

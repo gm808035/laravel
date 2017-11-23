@@ -103,7 +103,7 @@ class DashboardController extends Controller
         for($i=0;$i<$request->exemplar;$i++)
         {
             $book_item=new book_item;
-            $book_item->book_id=$id;
+            $book_item->book_id=$book->id;
             $book_item->serial_number=uniqid();
             $book_item->save();
         }

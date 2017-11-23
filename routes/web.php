@@ -27,9 +27,12 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['auth']],fun
     Route::get('/create2/{id}','DashboardController@book_author');
     Route::post('/create2','DashboardController@store_authors');
     Route::get('/book_items/{id}','BItemsController@index');
+    Route::get('/kategory/{id}','BooksController@kategory');
+    Route::get('/authors/{id}','BooksController@authors');
     Route::post('/book_items','BItemsController@store');
     Route::delete('/book_items/{id}','BItemsController@destroy');
     Route::resource('books','BooksController');
+    Route::get('/books/{id}/edit2','BooksController@edit2');
 });
 
 /*Route::get('/', function () {
