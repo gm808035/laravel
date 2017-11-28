@@ -14,7 +14,7 @@ class CreateAuthorBooksTable extends Migration
     public function up()
     {
         Schema::create('author_books', function (Blueprint $table) {
-            $table->increments('author_book_id');
+            $table->increments('id');
             $table->integer('author_id');
             $table->integer('book_id');
             $table->boolean('author_main');

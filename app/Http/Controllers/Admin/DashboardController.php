@@ -66,13 +66,12 @@ class DashboardController extends Controller
         $author_book = new author_book;
         $author_book->author_id = $request->author;
         $author_book->book_id=$request->book_id;
-        var_dump($author_book);
         if( $request->has('main')) 
         {
             $author_book->author_main=1;
         }
         $author_book->save();      
-        return redirect('admin/create2/'.$request->book_id.'');
+        return back();
     }
     public function store_book(Request $request)
     {

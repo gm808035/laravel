@@ -117,33 +117,62 @@
 <div class="panel-body"> 
     <div class="form-group">
         <label for="book">Книга:</label>
-        <input type="text" class="hidden"  name="book_id" value="{{$book->id}}">
         <p class="form-control-static">{{$book->books_name}}<p>
     </div>
     <label for="author">Авторы</label>
     @foreach($book->authors as $book_author)
         <div class="form-group">
-            <div class="col-sm-8">
-                <select name="author" class="form-control">
-                    @foreach ($authors as $author)
-                        @if($author->id==$book_author->id)
-                        <option value="{!! $author->id !!}" selected>{!! $author->author_name !!} {!! $author->author_middlename !!} {!! $author->author_surname !!}</option>
-                        @else
-                            <option value="{!! $author->id !!}">{!! $author->author_name !!} {!! $author->author_middlename !!} {!! $author->author_surname !!}</option>
-                        @endif
-                    @endforeach
-                </select>
-            </div>
+            <div class="row">
+            <form method="POST" action="{{ url('/admin/books/'.$book->id.'/edit2') }}">
+                {{ csrf_field() }}  
+                {{method_field('PUT')}}
+                <input type="text" class="hidden"  name="author_id" value="{{$book_author->id}}">
+                <div class="col-sm-8">
+                    <select name="author" class="form-control">
+                        @foreach ($authors as $author)
+                            @if($author->id==$book_author->id)
+                            <option value="{!! $author->id !!}" selected>{!! $author->author_name !!} {!! $author->author_middlename !!} {!! $author->author_surname !!}</option>
+                            @else
+                                <option value="{!! $author->id !!}">{!! $author->author_name !!} {!! $author->author_middlename !!} {!! $author->author_surname !!}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <button type="submit" class="btn btn-default">Изменить</button>
+                </div>
+            </form>
             <div class="col-sm-2">
-                <button type="submit" class="btn btn-default">Изменить</button>
+            <form method="POST" action="{{ url('/admin/books/'.$book->id.'/'.$book_author->id) }}"> 
+                {{ csrf_field() }}
+                {{method_field('DELETE')}}
+                <button class="btn btn-block btn-default">Delete</button>
+            </form>
             </div>
-            <div class="col-sm-2">
-                <button type="submit" class="btn btn-default">Удалить</button>
             </div>
         </div>
     @endforeach
+    <label for="author">Добавить нового автора:</label>
+    <form class="form-horizontal" method="POST" action="{{ url('admin/create2') }}">
+    {{ csrf_field() }}
     <div class="form-group">
-        <button type="submit" class="btn btn-default">Выйти</button>
+        <div class="col-sm-10">
+            <input type="text" class="hidden"  name="book_id" value="{{$book->id}}">
+            <select name="author" class="form-control">
+                @foreach ($authors as $author)
+                    <option value="{!! $author->id !!}">{!! $author->author_name !!} {!! $author->author_middlename !!} {!! $author->author_surname !!}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-sm-2">
+                <button type="submit" class="btn btn-default">Добавить</button>
+        </div>
+    </div>
+    </form>
+    <div class="form-group">
+    <div class="col-sm-2 ">
+        <a class="btn btn-block btn-default" href="{{ url('/admin/books/'.$book->id) }}">Выйти</a>
+    </div>
     </div>
 </div>
 </div>

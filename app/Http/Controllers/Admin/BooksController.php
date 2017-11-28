@@ -93,6 +93,27 @@ class BooksController extends Controller
         return view('books/edit2')->with('book',$book)
                                 ->with('authors',$authors);
     }
+    public function update_book_author(Request $request,$id)
+    {
+        $author_book=author_book::where('book_id',$id)->where('author_id',$request->author_id)->get();
+        foreach($author_book as $ab)
+        {
+            $a=author_book::find($ab->id);
+            $a->author_id = $request->author;
+            $a->save();
+        }
+        return redirect('admin/books/'.$id.'');
+    }
+    public function destroy_book_author($id1,$id2)
+    {
+        $author_book=author_book::where('book_id',$id1)->where('author_id',$id2)->get();
+        foreach($author_book as $ab)
+        {
+            $a=author_book::find($ab->id);
+            $a->delete();
+        }
+        return back();
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -126,7 +147,7 @@ class BooksController extends Controller
             $book->books_image = $fileNameToStore;
         }
         $book->save();
-        return redirect('admin/books/'.$book->id.'');
+        return redirect('admin/books/'.$book->id.'/edit2');
     }
 
     /**
@@ -158,7 +179,7 @@ class BooksController extends Controller
     {
         $books=book::whereHas('authors',function($query) use ($id)
         {
-            $query->where('id',$id);
+            $query->where('authors.id',$id);
         })
         ->get();                 
         $books->load('authors', 'heading','language');

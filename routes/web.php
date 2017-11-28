@@ -32,7 +32,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['auth']],fun
     Route::post('/book_items','BItemsController@store');
     Route::delete('/book_items/{id}','BItemsController@destroy');
     Route::resource('books','BooksController');
-    Route::get('/books/{id}/edit2','BooksController@edit2');
+    Route::get('/books/{id}/edit2','BooksController@edit2');   
+    Route::put('/books/{id}/edit2','BooksController@update_book_author');
+    Route::delete('/books/{id1}/{id2}','BooksController@destroy_book_author');
 });
 
 /*Route::get('/', function () {
