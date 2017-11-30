@@ -31,7 +31,7 @@ class BooksController extends Controller
                     ->get();                 
         $books->load('authors', 'heading','language');
         $image_source=1;
-        return view('books/index')->with('books',$books)->with('src',$image_source);
+        return view('books/index')->with('books',$books)->with('src',$image_source)->with('h',$search);
     }
 
     /**
@@ -173,7 +173,8 @@ class BooksController extends Controller
                     ->get();                 
         $books->load('authors', 'heading','language');
         $image_source=0;
-        return view('books/index')->with('books',$books)->with('src',$image_source);
+        $kategory=heading::find($id);
+        return view('books/index')->with('books',$books)->with('src',$image_source)->with('h',$kategory->heading_name);
     }
     public function authors($id)
     {
@@ -184,6 +185,8 @@ class BooksController extends Controller
         ->get();                 
         $books->load('authors', 'heading','language');
         $image_source=0;
-        return view('books/index')->with('books',$books)->with('src',$image_source);
+        $author=author::find($id);
+        $author_name=$author->author_name." ".$author->author_surname." ".$author->author_middlename;
+        return view('books/index')->with('books',$books)->with('src',$image_source)->with('h',$author_name);;
     }
 }

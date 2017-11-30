@@ -13,7 +13,7 @@
                     </div>               
                 </form>
             <div class="col-sm-4">
-                <a class="btn btn-block btn-default" href="<?php echo e(url('admin/create')); ?>">Добавление</a>
+                <a class="btn btn-block btn-default" href="<?php echo e(url('admin/create')); ?>">Добавление книги</a>
             </div>
             <div class="col-sm-4">
                 <a class="btn btn-block btn-default" href="#">Выдача книги</a>

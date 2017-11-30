@@ -1,7 +1,7 @@
 @extends ('admin.layouts.app_admin')
 @section('content')
 <div class="container">
-    <h2>Книги<h2>
+    <h2>Книги "{{$h}}"<h2>
     @if(count($books)>0)
         @foreach ($books as $book)
             <div class="col-sm-6 well">

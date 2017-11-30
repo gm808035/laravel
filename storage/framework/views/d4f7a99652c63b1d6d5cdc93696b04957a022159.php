@@ -1,6 +1,6 @@
 <?php $__env->startSection('content'); ?>
 <div class="container">
-    <h2>Книги<h2>
+    <h2>Книги "<?php echo e($h); ?>"<h2>
     <?php if(count($books)>0): ?>
         <?php $__currentLoopData = $books; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $book): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="col-sm-6 well">
