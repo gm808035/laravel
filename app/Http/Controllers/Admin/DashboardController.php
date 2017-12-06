@@ -11,6 +11,7 @@ use App\book;
 use App\author;
 use App\author_book;
 use App\book_item;
+use App\checkout;
 class DashboardController extends Controller
 {
     //Dashboard
@@ -114,5 +115,18 @@ class DashboardController extends Controller
         $authors = author::orderBy('author_name', 'asc')->get();
         return view('admin/create2',['book'=>$book,'authors'=>$authors]);
     }
-    
+    public function store_checkout(Request $request)
+    {
+     $checkout = new book;
+     $checkout->checkouts_reader = $request->reader;
+     $checkout->checkouts_book_item=$request->book_item;
+     $checkout->checkouts_vozvrat=$request->vozvrat;
+     $checkout->checkouts_worker=Auth()->user()->id;
+     $checkout->save();
+     return back();
+    }
+    public function create_checkout()
+    {
+       return view('admin.checkout');
+    }
 }
