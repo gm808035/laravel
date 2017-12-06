@@ -11,8 +11,4 @@ class checkouts extends Model
     {
       return $this->belongsTo('App\book_item','book_id');
     }
-    public function User()
-    {
-      return $this->belongsTo('App\user','User_id');
-    }
 }
