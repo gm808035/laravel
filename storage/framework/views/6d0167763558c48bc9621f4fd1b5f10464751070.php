@@ -1,9 +1,7 @@
-@extends('admin.layouts.app_admin')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="container">
         <div class="row">
-                <form class="form-horizontal" method="GET" action="{{ url('/admin/books') }}">
+                <form class="form-horizontal" method="GET" action="<?php echo e(url('/admin/books')); ?>">
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="search">Найти книгу</label>
                         <div class="col-sm-8">
@@ -15,14 +13,15 @@
                     </div>               
                 </form>
             <div class="col-sm-4">
-                <a class="btn btn-block btn-default" href="{{url('admin/create')}}">Добавление книги</a>
+                <a class="btn btn-block btn-default" href="<?php echo e(url('admin/create')); ?>">Добавление</a>
             </div>
             <div class="col-sm-4">
-            <a class="btn btn-block btn-default" href="{{url('admin/checkout')}}">Выдача книги</a>
+            <a class="btn btn-block btn-default" href="<?php echo e(url('admin/checkout')); ?>">Выдача книги</a>
         </div>
             <div class="col-sm-4">
                 <a class="btn btn-block btn-default" href="#">Возврат книги</a>
             </div>
         </div>    
     </div> 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.layouts.app_admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
