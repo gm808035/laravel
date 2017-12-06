@@ -35,6 +35,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['auth']],fun
     Route::get('/books/{id}/edit2','BooksController@edit2');   
     Route::put('/books/{id}/edit2','BooksController@update_book_author');
     Route::delete('/books/{id1}/{id2}','BooksController@destroy_book_author');
+    Route::post('/checkout','DashboardController@store_checkout'); 
+    Route::get('/checkout','DashboardController@create_checkout'); 
 });
 
 /*Route::get('/', function () {
