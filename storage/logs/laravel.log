@@ -16561,3 +16561,11 @@ Did you mean one of these?
 #63 C:\\xampp\\htdocs\\laravel\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #64 {main}
 "} 
+[2017-12-06 06:09:50] local.ERROR: Maximum execution time of 30 seconds exceeded {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 1): Maximum execution time of 30 seconds exceeded at C:\\xampp\\htdocs\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Providers\\FoundationServiceProvider.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2017-12-06 06:09:50] local.ERROR: Maximum execution time of 30 seconds exceeded {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 1): Maximum execution time of 30 seconds exceeded at C:\\xampp\\htdocs\\laravel\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Providers\\FoundationServiceProvider.php:8)
+[stacktrace]
+#0 {main}
+"} 
