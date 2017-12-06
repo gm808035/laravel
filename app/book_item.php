@@ -10,4 +10,8 @@ class book_item extends Model
     {
       return $this->belongsTo('App\book','book_id');
     }
+    public function checkout()
+    {
+      return $this->belongsTo('App\checkout');
+    }
 }
